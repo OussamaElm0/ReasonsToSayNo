@@ -7,6 +7,11 @@ import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import com.example.naas.api.RetrofitInstance
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +27,18 @@ class MainActivity : AppCompatActivity() {
         val reasonTextView = findViewById<TextView>(R.id.reasonTextView)
 
         findViewById<Button>(R.id.generateBtn).setOnClickListener {
-
+            CoroutineScope(Dispatchers.IO).launch {
+                try {
+                    val response = RetrofitInstance.api.getReason()
+                    withContext(Dispatchers.Main) {
+                        reasonTextView.text = response.reason
+                    }
+                } catch (e: Exception) {
+                    withContext(Dispatchers.Main) {
+                        reasonTextView.text = "Error: ${e.message}"
+                    }
+                }
+            }
         }
     }
 }

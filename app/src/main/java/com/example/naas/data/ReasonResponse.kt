@@ -1,5 +1,5 @@
 package com.example.naas.data
 
-data class Reason(
+data class ReasonResponse(
     val reason: String
 )

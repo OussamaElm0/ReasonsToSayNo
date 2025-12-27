@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">NaaS</string>
+    <string name="app_name">Reasons To Say No</string>
     <string name="app_title">Reasons to Say No</string>
     <string name="reason_hint">Press the button to get a reason</string>
     <string name="generate_reason">Generate Reason</string>
